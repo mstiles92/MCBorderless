@@ -70,16 +70,31 @@ namespace MCBorderless {
                 originalWidth = rect.Width - rect.Left; // Right -> Width
                 originalHeight = rect.Height - rect.Top; // Bottom -> Height
 
-                //TODO: Handle multiple monitors - make the window fullscreen on the monitor that the center of the window is on.
-
                 SetForegroundWindow(process.MainWindowHandle);
                 originalWindowLong = GetWindowLong(process.MainWindowHandle, GWL_STYLE);
                 SetWindowLong(process.MainWindowHandle, GWL_STYLE, originalWindowLong & ~WS_CAPTION);
-                Size primaryMonitorSize = SystemInformation.PrimaryMonitorSize;
-                SetWindowPos(process.MainWindowHandle, IntPtr.Zero, 0, 0, primaryMonitorSize.Width, primaryMonitorSize.Height, SetWindowPosFlags.ShowWindow);
+                Screen screen = getScreenWithLargestIntersect(new Rectangle(originalX, originalY, originalWidth, originalHeight));
+                SetWindowPos(process.MainWindowHandle, IntPtr.Zero, screen.Bounds.Left, screen.Bounds.Top, screen.Bounds.Width, screen.Bounds.Height, SetWindowPosFlags.ShowWindow);
 
                 isFullscreen = true;
             }
+        }
+
+        private static Screen getScreenWithLargestIntersect(Rectangle windowBounds) {
+            Screen largest = Screen.PrimaryScreen;
+            int largestArea = 0;
+
+            foreach (Screen s in Screen.AllScreens) {
+                Rectangle intersect = Rectangle.Intersect(s.Bounds, windowBounds);
+                int intersectArea = intersect.Width * intersect.Height;
+
+                if (intersectArea > largestArea) {
+                    largestArea = intersectArea;
+                    largest = s;
+                }
+            }
+
+            return largest;
         }
 
         /*
