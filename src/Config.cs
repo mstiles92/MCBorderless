@@ -15,8 +15,8 @@ namespace MCBorderless {
         public static Config loadFromRegistry() {
             Microsoft.Win32.RegistryKey registry = Application.UserAppDataRegistry;
 
-            string[] windowTitleContents = (string[]) registry.GetValue("WindowTitleContents", "Minecraft");
-            string[] windowTitleExclusions = (string[]) registry.GetValue("WindowTitleExclusions", "Launcher");
+            string[] windowTitleContents = (string[]) registry.GetValue("WindowTitleContents", new string[] {"Minecraft"});
+            string[] windowTitleExclusions = (string[]) registry.GetValue("WindowTitleExclusions", new string[] {"Launcher"});
 
             return new Config(windowTitleContents, windowTitleExclusions);
         }
