@@ -12,7 +12,7 @@ namespace MCBorderless {
         public static int WS_THICKFRAME = 262144;
         public static int WS_CAPTION = WS_BORDER | WS_DLGFRAME | WS_THICKFRAME;
 
-        private static Config config = Config.loadFromJson("MCBorderless-Config.json");
+        private static Config config = Config.loadFromRegistry();
         private static bool isFullscreen = false;
         private static int originalX = -1;
         private static int originalY = -1;
