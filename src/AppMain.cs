@@ -18,6 +18,7 @@ namespace MCBorderless {
             this.contextMenu.MenuItems[0].Click += new EventHandler(this.OpenSettings);
             this.contextMenu.MenuItems.Add("Exit");
             this.contextMenu.MenuItems[1].Click += new EventHandler(this.ExitProgram);
+            this.notifyIcon.DoubleClick += new EventHandler(this.OpenSettings);
             this.notifyIcon.Visible = true;
 
             this.notifyIcon.BalloonTipTitle = "MCBorderless";
