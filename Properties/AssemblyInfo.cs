@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("MCBorderless")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("mstiles92")]
 [assembly: AssemblyProduct("MCBorderless")]
-[assembly: AssemblyCopyright("Copyright © Matthew Stiles 2014")]
+[assembly: AssemblyCopyright("Copyright © Matthew Stiles (mstiles92) 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
