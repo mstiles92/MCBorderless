@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace MCBorderless {
     class Config {
@@ -27,6 +29,24 @@ namespace MCBorderless {
                 reader.Close();
                 return JsonConvert.DeserializeObject<Config>(json);
             }
+        }
+
+        public static Config loadFromRegistry() {
+            Microsoft.Win32.RegistryKey registry = Application.UserAppDataRegistry;
+
+            string[] windowTitleContents = (string[]) registry.GetValue("WindowTitleContents");
+            string[] windowTitleExclusions = (string[]) registry.GetValue("WindowTitleExclusions");
+
+            return new Config(windowTitleContents, windowTitleExclusions);
+        }
+
+        public void saveToRegistry() {
+            Microsoft.Win32.RegistryKey registry = Application.UserAppDataRegistry;
+
+            registry.SetValue("WindowTitleContents", WindowTitleContents);
+            registry.SetValue("WindowTitleExclusions", WindowTitleExclusions);
+
+            registry.Flush();
         }
     }
 }
